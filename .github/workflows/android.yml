@@ -39,12 +39,6 @@ jobs:
       run: git rev-parse HEAD > app/build/outputs/apk/alpha/release/rev-hash.txt
     - name: Rename APK to universal
       run: mv app/build/outputs/apk/alpha/release/app-alpha-release-signed.apk app/build/outputs/apk/alpha/release/app-alpha-universal-release.apk
-    - uses: dev-drprasad/delete-tag-and-release@v1.1
-      name: Delete latest alpha tag and release
-      with:
-        tag_name: latest
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Sleep for 30 seconds, to allow the tag to be deleted
       run: sleep 30s
       shell: bash
