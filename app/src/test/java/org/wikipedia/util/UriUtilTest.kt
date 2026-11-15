@@ -1,3 +1,11 @@
+package org.wikipedia.util
+
+import android.net.Uri
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class UriUtilTest {
     @Test
     fun testIsAppSupportedLink() {
         assertTrue(UriUtil.isAppSupportedLink(Uri.parse("https://wiki.skyblock.net/wiki/Obama_Barack?markasread=10520073")))
@@ -6,3 +14,4 @@
         assertFalse(UriUtil.isAppSupportedLink(Uri.parse("https://commons.wikimedia.org/wiki/User_talk:Cooltey")))
         assertFalse(UriUtil.isAppSupportedLink(Uri.parse("https://mediawiki.org/wiki/Help:Login_notifications")))
     }
+}
