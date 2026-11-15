@@ -39,9 +39,6 @@ jobs:
       run: git rev-parse HEAD > app/build/outputs/apk/alpha/release/rev-hash.txt
     - name: Rename APK to universal
       run: mv app/build/outputs/apk/alpha/release/app-alpha-release-signed.apk app/build/outputs/apk/alpha/release/app-alpha-universal-release.apk
-    - name: Sleep for 30 seconds, to allow the tag to be deleted
-      run: sleep 30s
-      shell: bash
     - uses: ncipollo/release-action@v1.21.0
       name: Create new tag and release and upload artifacts
       with:
