@@ -100,8 +100,8 @@ class SharedPreferenceCookieManager(
             val cookiesForDomainSpec = cookieJar[domainSpec]!!
             if (domain == domainSpec || domain.endsWith(".$domainSpec")) {
                 buildCookieList(cookieList, cookiesForDomainSpec, null)
-            } else if (Service.isWikimediaAuthority(domainSpec) && Service.isWikimediaAuthority(domain)) {
-                // Transfer CentralAuth cookies to any subdomains of .wikipedia.org
+            } else if (isWikimediaAuthority(domainSpec) && isWikimediaAuthority(domain)) {
+                // Transfer CentralAuth cookies between Wikimedia authorities, but never to the custom wiki.
                 buildCookieList(cookieList, cookiesForDomainSpec, CENTRALAUTH_PREFIX)
             }
         }
@@ -110,6 +110,10 @@ class SharedPreferenceCookieManager(
             LoginClient.enqueueForceEmailAuth = false
         }
         return cookieList
+    }
+
+    private fun isWikimediaAuthority(authority: String): Boolean {
+        return !WikiSite.supportedAuthority(authority) && Service.isWikimediaAuthority(authority)
     }
 
     @Synchronized
